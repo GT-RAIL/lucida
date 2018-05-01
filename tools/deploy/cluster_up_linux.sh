@@ -20,8 +20,8 @@ gcr.io/google_containers/hyperkube-${ARCH}:${K8S_VERSION} \
     --cluster-dns=10.0.0.10 \
     --cluster-domain=cluster.local \
     --allow-privileged --v=2
-curl -sSL "http://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl" > /usr/bin/kubectl
-chmod +x /usr/bin/kubectl
+# curl -sSL "http://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl" > /usr/bin/kubectl
+# chmod +x /usr/bin/kubectl
 kubectl config set-cluster test-doc --server=http://localhost:8080
 kubectl config set-context test-doc --cluster=test-doc
 kubectl config use-context test-doc

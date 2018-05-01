@@ -27,5 +27,5 @@ cd caffe \
   && if [ ! -f libhdf5.so ]; then sudo ln -s libhdf5_serial.so libhdf5.so; fi \
   && if [ ! -f libhdf5_hl.so ]; then sudo ln -s libhdf5_serial_hl.so libhdf5_hl.so; fi \
   && popd \
-  && make -j$THREADS \
-  && make distribute
+  && make -j$THREADS PYTHON_INCLUDE='/usr/include/python2.7 /usr/local/lib/python2.7/dist-packages/numpy/core/include' \
+  && make distribute PYTHON_INCLUDE='/usr/include/python2.7 /usr/local/lib/python2.7/dist-packages/numpy/core/include'

@@ -31,7 +31,7 @@ spec:
       volumes:
         - hostPath:
             # Modify the path below.
-            path: /home/lucida_data/openephyra
+            path: /tmp/lucida_data/openephyra
             # Move "wiki_indri_index" to the above directory
             # if it has been downloaded from "../download_wiki_index.sh".
           name: openephyra-persistent-storage

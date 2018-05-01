@@ -1,11 +1,11 @@
 SUBDIRS=server test
 include ../../../Makefile.common
 
-start_server: 
+start_server:
 	cd server; ./imm_server
 
-start_test: 
-	cd test; ./imm_test 
+start_test:
+	cd test; ./imm_test
 
 docker:
 	cp ../../lucidaservice.thrift .; \

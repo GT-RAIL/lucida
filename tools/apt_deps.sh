@@ -5,7 +5,13 @@
 apt-get update
 ln -s -f bash /bin/sh
 ln -s /usr/bin/pip2 /usr/local/bin/pip
+apt-get install -y software-properties-common \
+                   python-software-properties
+add-apt-repository ppa:george-edison55/cmake-3.x
+apt-get update
 apt-get install -y zlib1g-dev \
+                   build-essential \
+                   cmake \
                    libatlas3-base \
                    python2.7-dev \
                    libblas3 \
@@ -40,7 +46,6 @@ apt-get install -y zlib1g-dev \
                    libatlas-base-dev \
                    libiberty-dev \
                    liblapack-dev \
-                   cmake \
                    zip \
                    unzip \
                    sox \

@@ -19,20 +19,24 @@ if installCheck "$0"; then
   exit 0;
 fi
 
+# Make sure services can start - https://askubuntu.com/questions/365911/why-the-services-do-not-start-at-installation
+# echo "#!/bin/sh" > /usr/sbin/policy-rc.d
+# echo "exit 0" >> /usr/sbin/policy-rc.d
+
 # MongoDB.
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 apt-get update
-apt-get install -y mongodb-org
-service mongod start
+apt-get install -y mongodb-org systemd
+# service mongod start
 
-if [ `ps -ef | grep -cPe "\Wmongod "` -lt 1 ]; then
-  cp mongodb.service /lib/systemd/system/mongodb.service
-  systemctl enable mongodb.service
-  chown -R mongodb:mongodb /var/lib/mongodb
-  chown -R mongodb:mongodb /var/log/mongodb
-  systemctl start mongodb
-fi
+# if [ `ps -ef | grep -cPe "\Wmongod "` -lt 1 ]; then
+#   cp mongodb.service /lib/systemd/system/mongodb.service
+#   systemctl enable mongodb.service
+#   chown -R mongodb:mongodb /var/lib/mongodb
+#   chown -R mongodb:mongodb /var/log/mongodb
+#   systemctl start mongodb
+# fi
 
 # C driver.
 apt-get install git gcc automake autoconf libtool
@@ -80,10 +84,10 @@ cd mongo-cxx-driver \
  && scons --prefix=/usr/local --c++11=on --ssl --disable-warnings-as-errors=on install \
  && cd ..
 
-if installCheck "$0"; then
-  echo "MongoDB and C++ driver installed";
-  exit 0;
-else
-  echo "Failed to install MongoDB and C++ driver";
-  exit 1;
-fi
+# if installCheck "$0"; then
+#   echo "MongoDB and C++ driver installed";
+#   exit 0;
+# else
+#   echo "Failed to install MongoDB and C++ driver";
+#   exit 1;
+# fi
