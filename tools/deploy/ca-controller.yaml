@@ -14,7 +14,7 @@ spec:
         name: ca
     spec:
       containers:
-      - image: gtrail/lucida:latest
+      - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
         args: ['cd $LUCIDAROOT/calendar/ && ./gradlew run']
         name: ca

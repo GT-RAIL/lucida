@@ -14,7 +14,7 @@ spec:
         name: imm
     spec:
       containers:
-      - image: gtrail/lucida:latest
+      - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
         args: ['cd $LUCIDAROOT/imagematching/opencv_imm/server/ && ./imm_server']
         name: imm

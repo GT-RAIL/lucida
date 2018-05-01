@@ -8,14 +8,14 @@ class FakeSecHead(object):
 
     def readline(self):
         if self.sechead:
-            try: 
+            try:
                 return self.sechead
-            finally: 
+            finally:
                 self.sechead = None
-        else: 
+        else:
             return self.fp.readline()
 
 cp = ConfigParser.SafeConfigParser()
-cp.readfp(FakeSecHead(open("../config.properties")))
+cp.readfp(FakeSecHead(open("/usr/local/lucida/lucida/config.properties")))
 port_dic = dict(cp.items('asection'))
 cmd_port = int(port_dic['cmd_port'])

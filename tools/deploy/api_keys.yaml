@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: api_keys
+  name: apikeys
 type: Opaque
 data:
-  wu_api_key: WU_API_KEY
-  gracenote_client_id: GRACENOTE_CLIENT_ID
-  gracenote_user_id: GRACENOTE_USER_ID
-  owm_api_key: OWM_API_KEY
+  wu-api-key: WUAPIKEY
+  gracenote-client-id: GRACENOTECLIENTID
+  gracenote-user-id: GRACENOTEUSERID
+  owm-api-key: OWMAPIKEY

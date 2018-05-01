@@ -14,7 +14,7 @@ spec:
         name: we
     spec:
       containers:
-      - image: gtrail/lucida:latest
+      - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
         args: ['cd $LUCIDAROOT/weather/server/ && python WeatherServer.py']
         name: we
@@ -25,10 +25,10 @@ spec:
           - name: WU_API_KEY
             valueFrom:
               secretKeyRef:
-                name: api_keys
-                key: wu_api_key
+                name: apikeys
+                key: wu-api-key
           - name: OWM_API_KEY
             valueFrom:
               secretKeyRef:
-                name: api_keys
-                key: owm_api_key
+                name: apikeys
+                key: owm-api-key

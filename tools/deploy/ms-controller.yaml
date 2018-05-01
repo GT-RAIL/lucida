@@ -14,7 +14,7 @@ spec:
         name: ms
     spec:
       containers:
-      - image: gtrail/lucida:latest
+      - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
         args: ['cd $LUCIDAROOT/musicservice/server/ && python server.py']
         name: ms
@@ -25,10 +25,10 @@ spec:
           - name: GRACENOTE_CLIENT_ID
             valueFrom:
               secretKeyRef:
-                name: api_keys
-                key: gracenote_client_id
+                name: apikeys
+                key: gracenote-client-id
           - name: GRACENOTE_USER_ID
             valueFrom:
               secretKeyRef:
-                name: api_keys
-                key: gracenote_user_id
+                name: apikeys
+                key: gracenote-user-id
