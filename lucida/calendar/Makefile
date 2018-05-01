@@ -23,11 +23,11 @@ corenlp:
 		mv stanford-corenlp-full-2016-10-31 lib; \
 	fi
 
-start_server: 
+start_server:
 	./gradlew run
 
-start_test: 
-	cd CalendarClient; ./start-Calendar-client.sh 
+start_test:
+	cd CalendarClient; ./start-Calendar-client.sh
 
 clean:
 	rm -rf src/main/java/thrift && rm -rf CalendarClient/thrift && rm -rf CalendarClient/*.class && rm -rf build && rm -rf lib

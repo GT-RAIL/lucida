@@ -14,10 +14,21 @@ spec:
         name: ms
     spec:
       containers:
-      - image: claritylab/lucida:v2.2
+      - image: gtrail/lucida:latest
         command: ['/bin/sh', '-c']
         args: ['cd $LUCIDAROOT/musicservice/server/ && python server.py']
         name: ms
         ports:
         - containerPort: 8089
           name: thrift
+        env:
+          - name: GRACENOTE_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: api_keys
+                key: gracenote_client_id
+          - name: GRACENOTE_USER_ID
+            valueFrom:
+              secretKeyRef:
+                name: api_keys
+                key: gracenote_user_id

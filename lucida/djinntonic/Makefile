@@ -14,7 +14,7 @@ all:
 		python -mthrift_compiler.main --gen cpp2 ../lucidatypes.thrift; \
 	fi \
 	&& cd models \
-	&& if [[ ! -f face.caffemodel ]]; then wget -c http://web.eecs.umich.edu/~jahausw/download/${fname} && tar xvzf ${fname} && rm -rf ${fname}; if [[ $? -ne 0 ]]; then echo "Could not download caffe models!!! Please try again later..."; exit 1; fi; fi \
+	&& if [[ ! -f face.caffemodel ]]; then (wget -c http://web.eecs.umich.edu/~jahausw/download/${fname} && tar xvzf ${fname} && rm -rf ${fname}) || (echo "Could not download caffe models!!! Please try again later..." && exit 1); fi \
         && export CXXFLAGS="-I/usr/include/hdf5/serial" \
 	&& cd ../imc \
 	&& make \

@@ -13,11 +13,11 @@ thrift:
        rmdir gen-java/; \
     fi
 
-start_server: 
+start_server:
 	chmod +x start_server.sh && ./start_server.sh
 
-start_test: 
-	chmod +x start_test.sh && ./start_test.sh 
+start_test:
+	chmod +x start_test.sh && ./start_test.sh
 
 clean:
 	rm -rf bin

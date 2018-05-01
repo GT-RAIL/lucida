@@ -46,8 +46,8 @@ If you see results popping up, it should be ready to go.
 Text to Speech
 --------
 
-In addition to the speech recognition service, we provide a text-to-speech (TTS) service based on [kaldi idlak](https://github.com/bpotard/idlak). 
-Currently, it is experimental because our web front end uses the [web APIs](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis) to perform voice synthesis. 
+In addition to the speech recognition service, we provide a text-to-speech (TTS) service based on [kaldi idlak](https://github.com/bpotard/idlak).
+Currently, it is experimental because our web front end uses the [web APIs](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis) to perform voice synthesis.
 However, you are welcome to use this service by running the script `install_kaldi_tts.sh`.
 It installs both the kaldi toolkit (~4 hours for C++ compilation) and the idlak component (~4 hours for DNN training), and at the end of this process, we provide one way to use it --
 convert text input from command line to audio file saved on disk.
@@ -78,12 +78,12 @@ Changelog
   * 2015-12-04: added a link to the Dockerfile.
 
   * 2015-06-30: server now uses the recently added "full final results" functionality of gst-kaldi-nnet2-online.
-  Full results can include things like n-best hypotheses, word and phone alignment information, 
+  Full results can include things like n-best hypotheses, word and phone alignment information,
   and possibly other things in the future. You have to upgrade gst-kaldi-nnet2-online (when using this plugin instead of
   the GMM-based Kaldi GStreamer plugin) prior to using this. Also added a sample full results post-processing
   script `sample_full_post_processor.py` (see `sample_english_nnet2.yaml` on how to use it).
-  
-  
+
+
 
 Installation
 ------------

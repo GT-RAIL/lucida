@@ -1,7 +1,7 @@
 # Automatic Speech Recognition (ASR)
 
 The current implementation of ASR uses [Kaldi](http://kaldi.sourceforge.net/),
-a speech recognition toolkit written in C++ that is freely available under the Apache license. 
+a speech recognition toolkit written in C++ that is freely available under the Apache license.
 
 ## Notes:
 

@@ -2,7 +2,9 @@
 Weather API configuration details
 """
 
-import ConfigParser, sys
+import os
+import sys
+import ConfigParser
 
 class FakeSecHead(object):
     def __init__(self, fp):
@@ -11,11 +13,11 @@ class FakeSecHead(object):
 
     def readline(self):
         if self.sechead:
-            try: 
+            try:
                 return self.sechead
-            finally: 
+            finally:
                 self.sechead = None
-        else: 
+        else:
             return self.fp.readline()
 
 cp = ConfigParser.SafeConfigParser()
@@ -26,9 +28,9 @@ PORT = int(port_dic['we_port'])
 # Weather Underground API key
 # https://www.wunderground.com/weather/api/
 WU_API_URL_BASE = 'http://api.wunderground.com/api/'
-WU_API_KEY =  # TODO: add your API key here
+WU_API_KEY = os.getenv('WU_API_KEY') # add your API key here
 
 # Open Weather Map API key
 # https://openweathermap.org/api
 OWM_API_URL_BASE = 'http://api.openweathermap.org/data/2.5/weather?'
-OWM_API_KEY =  # TODO: add your API key here
+OWM_API_KEY = os.getenv('OWM_API_KEY') # add your API key here

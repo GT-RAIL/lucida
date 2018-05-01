@@ -1,3 +1,5 @@
+SHELL:=/bin/bash
+
 all:
 	./install_kaldi.sh
 
