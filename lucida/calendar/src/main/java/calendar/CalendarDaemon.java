@@ -32,8 +32,8 @@ import thrift.*;
  * Starts the calendar server and listens for requests.
  */
 public class CalendarDaemon {
-	public static void main(String [] args) 
-			throws TTransportException, IOException, InterruptedException {	
+	public static void main(String [] args)
+			throws TTransportException, IOException, InterruptedException {
 		Properties port_cfg = new Properties();
 		InputStream input = new FileInputStream("../config.properties");
 		port_cfg.load(input);
@@ -43,7 +43,7 @@ public class CalendarDaemon {
 				new CAServiceHandler.AsyncCAServiceHandler());
 		TNonblockingServerTransport transport = new TNonblockingServerSocket(port);
 		TThreadedSelectorServer.Args arguments = new TThreadedSelectorServer.Args(transport)
-		.processor(proc)	
+		.processor(proc)
 		.protocolFactory(new TBinaryProtocol.Factory())
 		.transportFactory(new TFramedTransport.Factory());
 		final TThreadedSelectorServer server = new TThreadedSelectorServer(arguments);

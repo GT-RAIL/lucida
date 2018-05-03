@@ -12,8 +12,8 @@ cd Python-2.7.12
 make
 make install
 cd ../
-virtualenv python_2_7_12 -p localpython2_7_12/bin/python2.7
-source python_2_7_12/bin/activate
+virtualenv $(basename $LUCIDA_PYTHON_ENV) -p localpython2_7_12/bin/python2.7
+source $(basename $LUCIDA_PYTHON_ENV)/bin/activate
 pip install --upgrade distribute
 pip install --upgrade pip
 pip install -r python_requirements.txt

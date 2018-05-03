@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:all
         command: ['/bin/bash', '-c']
-        args: ['cd $LUCIDA_ROOT/speechrecognition/kaldi_gstreamer_asr/ && source $LUCIDA_ROOT/../tools/python_2_7_12/bin/activate && python kaldigstserver/master_server.py --port=8081']
+        args: ['cd $LUCIDA_ROOT/speechrecognition/kaldi_gstreamer_asr/ && source $LUCIDA_PYTHON_ENV/bin/activate && python kaldigstserver/master_server.py --port=8081']
         name: asrmaster
         ports:
         - containerPort: 8081
