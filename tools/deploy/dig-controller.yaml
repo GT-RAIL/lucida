@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDAROOT/djinntonic/dig && ./DIGServer']
+        args: ['cd $LUCIDA_ROOT/djinntonic/dig && ./DIGServer']
         name: dig
         ports:
         - containerPort: 8087

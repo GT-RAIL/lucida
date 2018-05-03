@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDAROOT/calendar/ && ./gradlew run']
+        args: ['cd $LUCIDA_ROOT/calendar/ && ./gradlew run']
         name: ca
         ports:
         - containerPort: 8084

@@ -1,5 +1,5 @@
 ## build from lucida base image
 FROM gtrail/lucida:base
 
-WORKDIR $LUCIDAROOT/musicservice
+WORKDIR $LUCIDA_ROOT/musicservice
 RUN make all

@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDAROOT/musicservice/server/ && python server.py']
+        args: ['cd $LUCIDA_ROOT/musicservice/server/ && python server.py']
         name: ms
         ports:
         - containerPort: 8089

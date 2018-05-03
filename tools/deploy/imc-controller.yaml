@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDAROOT/djinntonic/imc && ./IMCServer']
+        args: ['cd $LUCIDA_ROOT/djinntonic/imc && ./IMCServer']
         name: imc
         ports:
         - containerPort: 8085

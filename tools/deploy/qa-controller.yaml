@@ -19,7 +19,7 @@ spec:
         command: ['/bin/sh', '-c']
         # Delete " && export wiki_indri_index=/usr/local/lucida/lucida/questionanswering/OpenEphyra/db/wiki_indri_index"
         # if you don't want to use Wikipedia as an additional knowledge base.
-        args: ['cd $LUCIDAROOT/questionanswering/OpenEphyra/ && export wiki_indri_index=/usr/local/lucida/lucida/questionanswering/OpenEphyra/db/wiki_indri_index && ./start_server.sh']
+        args: ['cd $LUCIDA_ROOT/questionanswering/OpenEphyra/ && export wiki_indri_index=/usr/local/lucida/lucida/questionanswering/OpenEphyra/db/wiki_indri_index && ./start_server.sh']
         name: qa
         ports:
         - containerPort: 8083

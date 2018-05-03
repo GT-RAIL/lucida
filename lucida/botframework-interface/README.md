@@ -4,7 +4,7 @@ Microsoft BotFramework interface to Lucida
 This interaface allows accessing Lucida services from BotFramework supported channels like Facebook, Skype, messaging etc. Currently only text infer queries are supported.
 
 ## Installation
-* Change directory to $LUCIDAROOT/botframework-interface and run `make all`
+* Change directory to $LUCIDA_ROOT/botframework-interface and run `make all`
 * Create a new bot at https://dev.botframework.com/bots/new
     - Fill in the name, bot handle and description for your bot.
     - Click on 'Create Microsoft App ID and password. Then click on generate password. Copy your App ID and password and keep them in a safe place.
@@ -13,7 +13,7 @@ This interaface allows accessing Lucida services from BotFramework supported cha
 * You may want to add channels on the bot page. Follow the instructions on https://dev.botframework.com/bots.
 
 ## Start Interface
-* Change directory to $LUCIDAROOT/botframework-interface and run `make start_server`
+* Change directory to $LUCIDA_ROOT/botframework-interface and run `make start_server`
 * First run will ask some questions. These can be modified later by editing 'config.sh'.
 
 ## Add User

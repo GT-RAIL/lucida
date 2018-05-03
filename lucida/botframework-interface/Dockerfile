@@ -1,5 +1,5 @@
 ## build from lucida base image
 FROM gtrail/lucida:base
 
-WORKDIR $LUCIDAROOT/botframework-interface
+WORKDIR $LUCIDA_ROOT/botframework-interface
 RUN make all

@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDAROOT/imagematching/opencv_imm/server/ && ./imm_server']
+        args: ['cd $LUCIDA_ROOT/imagematching/opencv_imm/server/ && ./imm_server']
         name: imm
         ports:
         - containerPort: 8082

@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:all
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDAROOT/weather/server/ && python WeatherServer.py']
+        args: ['cd $LUCIDA_ROOT/weather/server/ && python WeatherServer.py']
         name: we
         ports:
         - containerPort: 8088

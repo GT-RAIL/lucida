@@ -1,5 +1,5 @@
 #!/bin/bash
-LUCIDAROOT=$(pwd)/../../
+LUCIDA_ROOT=$(pwd)/../../
 if [ ! -d kaldi ]; then
   git clone https://github.com/kaldi-asr/kaldi.git
   if [ $? -ne 0 ]; then
@@ -38,12 +38,12 @@ cd kaldi \
  && ( apt-get -y update || : ) \
  && apt-get install -y libjansson-dev \
  && cd src \
- && export KALDI_ROOT=$LUCIDAROOT/speechrecognition/kaldi_gstreamer_asr/kaldi \
+ && export KALDI_ROOT=$LUCIDA_ROOT/speechrecognition/kaldi_gstreamer_asr/kaldi \
  && make depend \
  && make \
  && cd ../../../../ \
  && ./test/models/download-fisher-nnet2.sh \
- && export GST_PLUGIN_PATH=$LUCIDAROOT/speechrecognition/kaldi_gstreamer_asr/kaldi/tools/gst-kaldi-nnet2-online/src \
+ && export GST_PLUGIN_PATH=$LUCIDA_ROOT/speechrecognition/kaldi_gstreamer_asr/kaldi/tools/gst-kaldi-nnet2-online/src \
  && pip install tornado \
  && apt-get install -y python3-dev \
  && apt-get install -y python2.7-dev \

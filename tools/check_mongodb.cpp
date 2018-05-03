@@ -8,8 +8,8 @@ using namespace mongo;
 using namespace std;
 
 int main() {
-	if (const char* env_p = std::getenv("LUCIDAROOT")) {
-		std::cout << "LUCIDAROOT is: " << env_p << '\n';
+	if (const char* env_p = std::getenv("LUCIDA_ROOT")) {
+		std::cout << "LUCIDA_ROOT is: " << env_p << '\n';
 	}
 	DBClientConnection conn;
 	try {
@@ -18,9 +18,9 @@ int main() {
 	} catch( DBException &e ) {
 		cout << "Caught " << e.what() << endl;
 	}
-	string mongodbCollection = "lucida.images_Johann";  
-	auto_ptr<mongo::DBClientCursor> cursor = conn.query( mongodbCollection , mongo::BSONObj() );  
-	int count = 0;  
+	string mongodbCollection = "lucida.images_Johann";
+	auto_ptr<mongo::DBClientCursor> cursor = conn.query( mongodbCollection , mongo::BSONObj() );
+	int count = 0;
 	while (cursor->more()) {
 		cout << "@@@" << endl;
 		BSONObj p = cursor->next();

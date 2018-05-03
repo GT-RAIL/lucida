@@ -25,13 +25,13 @@ import edu.stanford.nlp.time.SUTime.Temporal;
 import edu.stanford.nlp.time.SUTime.Time;
 import edu.stanford.nlp.util.CoreMap;
 
-/** 
+/**
 * Parses the query as a range of date.
 */
 public class TextProcessor {
 	List<AnnotationPipeline> pieplines;
 
-	/** 
+	/**
 	 *  Constructor.
 	 *  Builds two pipelines, one for simple date and time, the other for duration.
 	 */
@@ -43,11 +43,11 @@ public class TextProcessor {
 		props2.setProperty("sutime.binders", "0");
 		props2.setProperty("sutime.markTimeRanges", "true");
 		props2.setProperty("sutime.includeRange", "true");
-		addPipeline(props2);		
+		addPipeline(props2);
 	}
 
-	/** 
-	 *  Creates and initializes an annotation pipeline. 
+	/**
+	 *  Creates and initializes an annotation pipeline.
 	 *
 	 *  @param props Properties describing the pipeline
 	 */
@@ -60,8 +60,8 @@ public class TextProcessor {
 		pieplines.add(pipeline);
 	}
 
-	/** 
-	 *  Returns the date range string by parsing text. 
+	/**
+	 *  Returns the date range string by parsing text.
 	 *
 	 *  @param text String representing the original query
 	 */
@@ -94,11 +94,11 @@ public class TextProcessor {
 				}
 			}
 		}
-		// Get the minimum and maximum time only if there are at least two Time objects in times. 
+		// Get the minimum and maximum time only if there are at least two Time objects in times.
 		if (times.size() >= 2) {
 			return new String[] {regexNormalize(Collections.min(times).toString(), 0),
 					regexNormalize(Collections.max(times).toString(), 1)};
-		} 
+		}
 		// Since the range couldn't be defined by times, define the range from has_seen.
 		for (Temporal temporal : has_seen) {
 			// Due to a bug (?) in coreNLP, getRange() for "current week" will result in year 2015.
@@ -126,8 +126,8 @@ public class TextProcessor {
 		return new String[] {null, null};
 	}
 
-	/** 
-	 *  Returns the date range string by parsing s as a week. 
+	/**
+	 *  Returns the date range string by parsing s as a week.
 	 *
 	 *  @param s String representing the result of the annotation pipeline
 	 *  @param text String representing the original query
@@ -144,21 +144,21 @@ public class TextProcessor {
 		return null;
 	}
 
-	/** 
-	 *  Returns the date string represented by week_num. 
+	/**
+	 *  Returns the date string represented by week_num.
 	 *
 	 *  @param week_num int indicating the index of the week in the current year
 	 */
 	private String getDateFromWeek(int week_num) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.WEEK_OF_YEAR, week_num);        
+		cal.set(Calendar.WEEK_OF_YEAR, week_num);
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		return sdf.format(cal.getTime()).toString() + "T00:00:00";
 	}
 
-	/** 
-	 *  Returns true if s is a readable string representing time. 
+	/**
+	 *  Returns true if s is a readable string representing time.
 	 *
 	 *  @param s String to check
 	 */
@@ -166,8 +166,8 @@ public class TextProcessor {
 		return !s.contains("UNKNOWN") && !s.contains("PXW") && !s.contains("PXD");
 	}
 
-	/** 
-	 *  Returns the normalized form for s and i. 
+	/**
+	 *  Returns the normalized form for s and i.
 	 *
 	 *  @param s String representing the result of the annotation pipeline
 	 *  @param s int representing whether s is the begin (i == 0) or end (i == 1) of the range
@@ -211,7 +211,7 @@ public class TextProcessor {
 		if (!debug) {
 			Scanner s = null;
 			try {
-				s = new Scanner(new File(System.getenv("LUCIDAROOT") +
+				s = new Scanner(new File(System.getenv("LUCIDA_ROOT") +
 					"/commandcenter/data/class_CA.txt"));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -235,8 +235,8 @@ public class TextProcessor {
 		}
 	}
 
-	/** 
-	 *  Compares two Temporals. 
+	/**
+	 *  Compares two Temporals.
 	 */
 	private static class TemporalComparator implements Comparator<Temporal> {
 		@Override

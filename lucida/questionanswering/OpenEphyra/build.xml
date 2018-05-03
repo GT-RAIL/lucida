@@ -76,7 +76,7 @@
     </target>
     <target name="lucida.main.QADaemon">
         <java classname="lucida.main.QADaemon" failonerror="true" fork="yes">
-            <env key="LUCIDAROOT" value="/home/yba/Documents/clarity/lucida/lucida"/>
+            <env key="LUCIDA_ROOT" value="/home/yba/Documents/clarity/lucida/lucida"/>
             <jvmarg line="-Djava.library.path=lib/search/"/>
             <classpath refid="OpenEphyra.classpath"/>
         </java>

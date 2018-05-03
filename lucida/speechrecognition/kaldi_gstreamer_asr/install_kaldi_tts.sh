@@ -1,5 +1,5 @@
 #!/bin/bash
-LUCIDAROOT=$(pwd)/../../
+LUCIDA_ROOT=$(pwd)/../../
 git clone https://github.com/bpotard/idlak.git
 mv idlak kaldi_tts
 cd kaldi_tts

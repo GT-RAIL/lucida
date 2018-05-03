@@ -16,7 +16,7 @@ spec:
       containers:
       - image: gtrail/lucida:commandcenter
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDAROOT/commandcenter/apache/ && sed -i s/LogLevel\ warn/LogLevel\ debug/ /etc/apache2/sites-available/000-default.conf && export ASR_ADDR_PORT=ws://localhost:30001 && env > envs.txt && chown -R www-data:www-data /usr/local/lucida/lucida/commandcenter && apachectl -DFOREGROUND -e debug']
+        args: ['cd $LUCIDA_ROOT/commandcenter/apache/ && sed -i s/LogLevel\ warn/LogLevel\ debug/ /etc/apache2/sites-available/000-default.conf && export ASR_ADDR_PORT=ws://localhost:30001 && env > envs.txt && chown -R www-data:www-data /usr/local/lucida/lucida/commandcenter && apachectl -DFOREGROUND -e debug']
         name: web
         ports:
         - containerPort: 80

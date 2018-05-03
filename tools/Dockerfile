@@ -3,12 +3,6 @@
 FROM ubuntu:14.04
 
 #### environment variables
-ENV LUCIDAROOT /usr/local/lucida/lucida
-ENV THRIFT_ROOT /usr/local/lucida/tools/thrift-$THRIFT_VERSION
-ENV LD_LIBRARY_PATH /usr/local/lib
-ENV CAFFE /usr/local/lucida/tools/caffe/distribute
-ENV CPU_ONLY 1 # for caffe
-
 ENV OPENCV_VERSION 2.4.9
 ENV THRIFT_VERSION 0.9.3
 ENV THREADS 4
@@ -16,8 +10,17 @@ ENV PROTOBUF_VERSION 2.5.0
 ENV JAVA_VERSION 8
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
+ENV LUCIDA_DEPS_ROOT /opt/
+ENV LUCIDA_ROOT /usr/local/lucida/lucida
+ENV LUCIDA_BIN /opt/lucida
+
+ENV THRIFT_ROOT $LUCIDA_DEPS_ROOT/thrift-$THRIFT_VERSION
+ENV LD_LIBRARY_PATH /usr/local/lib
+ENV CAFFE $LUCIDA_DEPS_ROOT/caffe/distribute
+ENV CPU_ONLY 1 # for caffe
+
 # set the workdir
-WORKDIR /usr/local/src
+WORKDIR $LUCIDA_DEPS_ROOT
 
 ## common package installations. From tools/apt-deps.sh for better build caching
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list && \
@@ -124,7 +127,7 @@ RUN git clone -b 2.4 https://github.com/opencv/opencv.git opencv-2.4 && \
     cmake .. && \
     make -j$THREADS && \
     make -j$THREADS install && \
-    cd ../../
+    cd $LUCIDA_DEPS_ROOT
 
 # thrift. from tools/install_thrift.sh
 RUN wget -c "http://archive.apache.org/dist/thrift/$THRIFT_VERSION/thrift-$THRIFT_VERSION.tar.gz" && \
@@ -167,19 +170,9 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 && \
         scons --prefix=/usr/local --c++11=on --ssl --disable-warnings-as-errors=on install && \
         cd ..
 
-## copy lucida into the image
-RUN mkdir -p $LUCIDAROOT/../
-ADD . $LUCIDAROOT/../
-WORKDIR "$LUCIDAROOT/../tools"
+# create directories for lucida outputs
+RUN mkdir -p $LUCIDA_BIN
+WORKDIR $LUCIDA_BIN
 
 # Setup the environment variables for the secrets
 ENV GRACENOTE_CLIENT_ID="" GRACENOTE_USER_ID="" WU_API_KEY="" OWM_API_KEY=""
-
-# python dependencies. from tools/install_python.sh
-RUN pip install numpy==1.14.0 scipy==0.19.0 scikit-learn==0.18.1 && \
-    virtualenv --system-site-packages python_2_7_12 && \
-    /bin/bash -c "source python_2_7_12/bin/activate && \
-    pip install -r python_requirements.txt"
-
-# Make Lucida
-WORKDIR $LUCIDAROOT

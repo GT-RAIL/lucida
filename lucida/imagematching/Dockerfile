@@ -1,5 +1,5 @@
 ## build from lucida base image
 FROM gtrail/lucida:base
 
-WORKDIR $LUCIDAROOT/imagematching
+WORKDIR $LUCIDA_ROOT/imagematching
 RUN make all

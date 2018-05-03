@@ -9,7 +9,7 @@ import org.apache.thrift.async.AsyncMethodCallback;
 
 import thrift.*;
 
-/** 
+/**
  * Implementation of the calendar interface. A client request to any
  * method defined in the thrift file is handled by the
  * corresponding method here.
@@ -24,14 +24,14 @@ public class CAServiceHandler {
 	public static class SyncCAServiceHandler implements LucidaService.Iface {
 		/** Text processor for parsing the input query. */
 		private TextProcessor TEXT_PROCESSOR;
-		
+
 		/** Constructs the handler and initializes its TextProcessor
 		 * object.
 		 */
 		public SyncCAServiceHandler() {
 			TEXT_PROCESSOR = new TextProcessor();
 		}
-		
+
 		/**
 		 * Do nothing.
 		 * @param LUCID ID of Lucida user

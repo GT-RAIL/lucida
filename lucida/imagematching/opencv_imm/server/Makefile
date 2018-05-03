@@ -33,7 +33,7 @@ LINKFLAGS =     -lopencv_core \
 				-lssl \
 				-lcrypto
 
-TARGET  = imm_server
+TARGET  = ${LUCIDA_BIN}/imm_server
 SOURCES = gen-cpp2/LucidaService_client.cpp \
 				gen-cpp2/lucidaservice_constants.cpp \
 				gen-cpp2/LucidaService.cpp \
