@@ -17,7 +17,7 @@ LDFLAGS += $(CAFFE)/build/lib/libcaffe.so
 CXXFLAGS += $(shell if [ `lsb_release -a 2>/dev/null | grep -Poe "(?<=\s)\d+(?=[\d\.]+$$)"` -gt 14 ]; then echo "-std=c++14"; fi;)
 LDFLAGS += -ljpeg -lzstd
 
-TARGET  = FACEServer 
+TARGET  = FACEServer
 SOURCES = $(wildcard *.cpp ../gen-cpp2/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
@@ -29,10 +29,10 @@ $(TARGET): $(OBJECTS)
 %.o: %.cpp
 	$(CXX) -Wall $(CXXFLAGS) -c $< -o $@
 
-start_server: 
+start_server:
 	./FACEServer
 
-start_test: 
+start_test:
 	cd test && ./FACEClient && cd ..
 
 client:

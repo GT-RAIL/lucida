@@ -29,10 +29,10 @@ $(TARGET): $(OBJECTS)
 %.o: %.cpp
 	$(CXX) -Wall $(CXXFLAGS) -c $< -o $@
 
-start_server: 
+start_server:
 	./DIGServer
 
-start_test: 
+start_test:
 	cd test && ./DIGClient && cd ..
 
 client:
