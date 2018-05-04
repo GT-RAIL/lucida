@@ -3,21 +3,37 @@
 # Also assume an x86_64 machine
 FROM ubuntu:trusty
 
-#### environment variables
-ENV OPENCV_VERSION=2.4.9 \
-    THRIFT_VERSION=0.9.3 \
-    PROTOBUF_VERSION=2.5.0 \
-    JAVA_VERSION=8 \
-    JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8" \
-    LUCIDA_DEPS_ROOT=/opt \
-    LUCIDA_ROOT=/usr/local/lucida/lucida \
-    LUCIDA_PYTHON_ENV=/usr/local/lucida/pyenv \
-    LUCIDA_BUILD=/usr/local/lucida/build \
-    LUCIDA_BIN=/usr/local/lucida/bin \
-    THRIFT_ROOT=$LUCIDA_DEPS_ROOT/thrift-$THRIFT_VERSION \
+#### environment variables and arguments
+ARG OPENCV_VERSION=2.4.9
+ARG THRIFT_VERSION=0.9.3
+ARG PROTOBUF_VERSION=2.5.0
+ARG JAVA_VERSION=8
+ARG JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+ARG LUCIDA_DEPS_ROOT=/opt
+ARG LUCIDA_INSTALL=/usr/local/lucida
+ARG LUCIDA_ROOT=${LUCIDA_INSTALL}/lucida
+ARG LUCIDA_PYTHON_ENV=${LUCIDA_INSTALL}/pyenv
+ARG LUCIDA_BUILD=${LUCIDA_INSTALL}/build
+ARG LUCIDA_LIB=${LUCIDA_INSTALL}/lib
+ARG LUCIDA_BIN=${LUCIDA_INSTALL}/bin
+ARG NVM_DIR=/usr/local/nvm
+
+ENV THRIFT_ROOT=$LUCIDA_DEPS_ROOT/thrift-$THRIFT_VERSION \
     LD_LIBRARY_PATH=/usr/local/lib \
-    CAFFE=$LUCIDA_DEPS_ROOT/caffe/distribute \
-    NVM_DIR=/usr/local/nvm
+    OPENCV_VERSION=${OPENCV_VERSION} \
+    THRIFT_VERSION=${THRIFT_VERSION} \
+    PROTOBUF_VERSION=${PROTOBUF_VERSION} \
+    JAVA_VERSION=${JAVA_VERSION} \
+    JAVA_TOOL_OPTIONS=${JAVA_TOOL_OPTIONS} \
+    LUCIDA_DEPS_ROOT=${LUCIDA_DEPS_ROOT} \
+    LUCIDA_INSTALL=${LUCIDA_INSTALL} \
+    LUCIDA_ROOT=${LUCIDA_ROOT} \
+    LUCIDA_PYTHON_ENV=${LUCIDA_PYTHON_ENV} \
+    LUCIDA_BUILD=${LUCIDA_BUILD} \
+    LUCIDA_LIB=${LUCIDA_LIB} \
+    LUCIDA_BIN=${LUCIDA_BIN} \
+    NVM_DIR=${NVM_DIR} \
+    PATH="${LUCIDA_BIN}:${PATH}"
 
 # set the workdir
 WORKDIR $LUCIDA_DEPS_ROOT
@@ -148,12 +164,12 @@ RUN mkdir -p $NVM_DIR && \
         /bin/bash -c "\. $NVM_DIR/nvm.sh && n lts" && \
     wget -c "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip" && \
         unzip -o ngrok-stable-linux-amd64.zip && \
-        (killall ngrok || :) && \
         ln -s $LUCIDA_DEPS_ROOT/ngrok /usr/bin/ngrok && \
+        rm ngrok-stable-linux-amd64.zip && \
     wget -c "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" && \
         tar -xf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-        (killall phantomjs || :) && \
-        ln -s $LUCIDA_DEPS_ROOT/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/phantomjs
+        ln -s $LUCIDA_DEPS_ROOT/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/phantomjs && \
+        rm phantomjs-2.1.1-linux-x86_64.tar.bz2
 
 # opencv. from tools/install_opencv.sh
 RUN git clone -b 2.4 https://github.com/opencv/opencv.git opencv-2.4 && \
@@ -167,7 +183,7 @@ RUN git clone -b 2.4 https://github.com/opencv/opencv.git opencv-2.4 && \
 # thrift. from tools/install_thrift.sh
 RUN wget -c "http://archive.apache.org/dist/thrift/$THRIFT_VERSION/thrift-$THRIFT_VERSION.tar.gz" && \
     tar xf thrift-$THRIFT_VERSION.tar.gz && \
-    cd thrift-$THRIFT_VERSION && \
+    cd $THRIFT_ROOT && \
     ./configure --with-lua=no --with-ruby=no --with-go=no --with-erlang=no --with-qt4=no --with-qt5=no && \
     make -j8 && \
     make -j8 install && \
@@ -175,7 +191,8 @@ RUN wget -c "http://archive.apache.org/dist/thrift/$THRIFT_VERSION/thrift-$THRIF
     python setup.py install && \
     cd ../../lib/java/ && \
     ant && \
-    cd $LUCIDA_DEPS_ROOT
+    cd $LUCIDA_DEPS_ROOT && \
+    rm thrift-$THRIFT_VERSION.tar.gz
 
 # fbthrift. from tools/install_fbthrift.sh
 RUN git clone -b v2017.03.20.00 https://github.com/facebook/fbthrift.git && \
@@ -206,7 +223,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 && \
         cd $LUCIDA_DEPS_ROOT
 
 # create directories for lucida and copy the source in there
-RUN mkdir -p $LUCIDA_ROOT $LUCIDA_PYTHON_ENV $LUCIDA_BUILD $LUCIDA_BIN
+RUN mkdir -p $LUCIDA_INSTALL $LUCIDA_ROOT $LUCIDA_PYTHON_ENV $LUCIDA_BUILD $LUCIDA_LIB $LUCIDA_BIN
 COPY ./lucida/ $LUCIDA_ROOT
 WORKDIR $LUCIDA_ROOT
 
