@@ -1,13 +1,13 @@
 # Tools
 
-This directory contains common tools that are used by Lucida micro-services, 
+This directory contains common tools that are used by Lucida micro-services,
 so please install all of them before compiling any micro-service.
 
 ## Install
 
 Type `make` to install all dependencies necessary for Lucida in the following order:
 
-- `apt_deps.sh`: various packages installed using `apt-get`. 
+- `apt_deps.sh`: various packages installed using `apt-get`.
 
 - `install_python.sh`: Python 2.7.9 virtual environment
 and various packages installed via `pip`.
@@ -42,7 +42,7 @@ Make sure to use `gcc 4.8.4`, because MongoDB C++ driver fails to compile on new
 2. Each script performs a simple check on whether the package is
 installed. If for some reason the installation failed, or the simple check
 is not sufficient and you want to force reinstallation,
-please either ```sudo ./install_xxx.sh```, 
+please either ```sudo ./install_xxx.sh```,
 or open the script and run the commands manually to make sure each command succeeds.
 
 3. Both Apache Thrift and Facebook are necessary, and you must install Apache Thrift first,

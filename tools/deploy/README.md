@@ -1,6 +1,6 @@
 # Deploy Lucida using Kubernetes
 
-[instructions.ipynb](instructions.ipynb) is a complete walkthrough for deplyoment of Lucida on Mac using a Ubuntu 14.04 virtual machine. If you are familiar with Linux commands, however, the following steps should be enough.
+[instructions.ipynb](../../doc/instructions.ipynb) is a complete walkthrough for deplyoment of Lucida on Mac using a Ubuntu 14.04 virtual machine. If you are familiar with Linux commands, however, the following steps should be enough.
 
 ## Steps
 
@@ -21,7 +21,7 @@
 
 3. Open `mongo-controller.yaml` and `qa-controller.yaml` and modify the `hostPath` fields
   to point to the directories where you want to store the data for MongoDB and OpenEphyra.
-  Make sure you have write access to the directories you specify. 
+  Make sure you have write access to the directories you specify.
 
   If you choose to use Wikipedia as an addition to the user-input knowledge base,
   move it to the correct directory according to the inline comment in `qa-controller.yaml`.
@@ -40,9 +40,9 @@
   web-controller-https.yaml
   asrmaster-controller-https.yaml
   ```
-  
+
   , and then rename the following files:
-  
+
   ```
   mv asrworker-controller-https.yaml asrworker-controller.yaml
   mv asrmaster-controller-https.yaml asrmaster-controller.yaml
@@ -58,7 +58,7 @@
   `docker ps | grep <controller_name>` followed by `docker exec -it <running_container_id> bash` to go inside the running containers.
   For example, if you see "Internal Server Error", you should check the web container,
   and see the error logs in `/usr/local/lucida/lucida/commandcenter/apache/logs/`.
-  Also, if MongoDB container is constantly being created without making progress, 
+  Also, if MongoDB container is constantly being created without making progress,
   run `sudo netstat -tulpn | grep 27017` and kill the currently running MongoDB instance which also uses the port 27017.
   This also applies to other containers, e.g. Memcached, qa, etc. whose ports are already used and thus cannot be started.
 

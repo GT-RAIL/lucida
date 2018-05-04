@@ -11,7 +11,7 @@ see [CONTRIBUTING](CONTRIBUTING.md) for more details.
 
 ## Overview
 
-- `lucida`: back-end services and command center (CMD). 
+- `lucida`: back-end services and command center (CMD).
   Currently, there are 7 categories of back-end services:
   "ASR" (automatic speech recognition), "IMM" (image matching), "QA" (question answering),
   "CA" (calendar events retrieval), "IMC" (image classification), "FACE" (facial recognition),
@@ -22,21 +22,21 @@ see [CONTRIBUTING](CONTRIBUTING.md) for more details.
   have an interesting image captioning end-to-end system,
   or have access to a quality machine translation algorithm,
   please read the section "How to Add Your Own Service into Lucida?" below.
-  
+
   The command center determines which services are needed based on the user input,
   sends requests to them, and returns response to the user.
   In the following diagram, the user asks a query that needs the following three services: ASR, IMM, and QA.
   The "cloud" behind each box means the Docker container(s) running on the host machine(s).
 
   <p align="center">
-    <img src="high_level.png" alt="" width="600" />
+    <img src="doc/high_level.png" alt="" width="600" />
   </p>
 
 - `tools`: dependencies necessary for compiling Lucida.
   Due to the fact that services share some common dependencies,
   all services should be compiled after these dependencies are installed.
   The advantage of a central point of dependencies is that the total size of compiled services is minimized;
-  the disadvantage is that it makes deleting a service from Lucida non-trivial -- you have to remove its dependencies in `tools`. 
+  the disadvantage is that it makes deleting a service from Lucida non-trivial -- you have to remove its dependencies in `tools`.
 
 ## Lucida Local Development
 
@@ -65,10 +65,10 @@ see [CONTRIBUTING](CONTRIBUTING.md) for more details.
   This will spawn a terminal window (`gnome-terminal`) for each service as well as the command center.
   Once they all start running,
   open your browser and visit `http://localhost:3000/`.
-  Check out the [`tutorial`](tutorial.pdf) for usage and sample questions.
-  
+  Check out the [`tutorial`](doc/tutorial.pdf) for usage and sample questions.
+
   Currently, the command center receives the user input in the form of HTTP requests sent from your browser,
-  but in future we can support other forms of input. 
+  but in future we can support other forms of input.
 
 ## Lucida Docker Deployment
 
@@ -80,7 +80,7 @@ see [CONTRIBUTING](CONTRIBUTING.md) for more details.
 
 - Navigate to [`tools/deploy/`](tools/deploy) and follow the instructions there.
 
-- Once done, check out the [`tutorial`](tutorial.pdf) for usage and sample questions.
+- Once done, check out the [`tutorial`](doc/tutorial.pdf) for usage and sample questions.
 
 ## REST API for command center
 
@@ -91,7 +91,7 @@ An [example client](lucida/botframework-interface) for botframework is available
 
 ### Back-end Communication
 
-Thrift is an RPC framework with the advantages of being efficient and language-neutral. 
+Thrift is an RPC framework with the advantages of being efficient and language-neutral.
 It was originally developed by Facebook and now developed by both the open-source community (Apache Thrift) and Facebook.
 We use both Apache Thrift and Facebook Thrift because Facebook Thrift has a fully asynchronous C++ server but does not support
 Java very well. Also, Apache Thrift seems to be more popular.
@@ -99,8 +99,8 @@ Therefore, we recommend using Apache Thrift for services written in Python and J
 and Facebook Thrift for services written in C++.
 However, you can choose either one for your own service as long as you follow the steps below.
 
-One disadvantage about Thrift is that the interface has to be pre-defined and implemented by each service. 
-If the interface changes, all services have to re-implement the interface. 
+One disadvantage about Thrift is that the interface has to be pre-defined and implemented by each service.
+If the interface changes, all services have to re-implement the interface.
 We try to avoid changing the interface by careful design, but if you really need to adapt the interface for your need,
 feel free to modify, but make sure that all services implement and use the new interface.
 
@@ -121,10 +121,10 @@ in order to add your own service into Lucida. Let's break it down into two steps
          string infer(1:string LUCID, 2:lucidatypes.QuerySpec query);
       }
       ```
-    
-      The basic functionalities that your service needs to provide are called `create`, `learn`, and `infer`. 
+
+      The basic functionalities that your service needs to provide are called `create`, `learn`, and `infer`.
       They all take in the same type of parameters, a `string` representing the Lucida user ID (`LUCID`),
-      and a `QuerySpec` defined in `lucida/lucidatypes.thrift`. 
+      and a `QuerySpec` defined in `lucida/lucidatypes.thrift`.
       The command center invokes these three procedures implemented by your service,
       and services can also invoke these procedures on each other to achieve communication.
       Thus the typical data flow looks like this:
@@ -140,7 +140,7 @@ in order to add your own service into Lucida. Let's break it down into two steps
       it won't block on waiting for the response from YOS1.
       If YOS0 implements the synchronous Thrift interface, it cannot make progress until
       YOS1 returns the response, so the operating system will perform a thread context switch,
-      and let the current thread sleep until YOS1 returns. 
+      and let the current thread sleep until YOS1 returns.
       See section 3 of step 1 for implementation details.
 
       `create`: create an intelligent instance based on supplied LUCID.
@@ -163,7 +163,7 @@ in order to add your own service into Lucida. Let's break it down into two steps
 
       Notice all the three functions take in `QuerySpec` as their second parameters,
       so let's see what `QuerySpec` means for each function.
-    
+
    2. [`lucida/lucidatypes.thrift`](lucida/lucidatypes.thrift):
 
       ```
@@ -177,10 +177,10 @@ in order to add your own service into Lucida. Let's break it down into two steps
           2: list<QueryInput> content;
       }
       ```
-    
-      A `QuerySpec` has a name, which is `create` for `create`, `knowledge` for `learn`, and `query` for `infer`. 
-      A `QuerySpec` also has a list of `QueryInput` called `content`, which is the data payload. 
-      A `QueryInput` consists of a `type`, a list of `data`, and a list of `tags`. 
+
+      A `QuerySpec` has a name, which is `create` for `create`, `knowledge` for `learn`, and `query` for `infer`.
+      A `QuerySpec` also has a list of `QueryInput` called `content`, which is the data payload.
+      A `QueryInput` consists of a `type`, a list of `data`, and a list of `tags`.
 
       * If the function call is `learn`:
 
@@ -190,7 +190,7 @@ in order to add your own service into Lucida. Let's break it down into two steps
       or `unlearn` (undo learn) for the reverse process of learn.
       Here is our assumptions: a service can handle either text or image,
       and if it can handle text,
-      the types your service should handle are `text`, `url`, and `unlearn`, 
+      the types your service should handle are `text`, `url`, and `unlearn`,
       and if it can handle image,
       the types your service should handle are `image` and `unlearn`.
       See step 2 for details on how to specify the type of knowledge that your service can learn.
@@ -228,8 +228,8 @@ in order to add your own service into Lucida. Let's break it down into two steps
       Therefore, the above service graph results in a `QuerySpec` that looks like this:
 
       ```
-      { name: "query", 
-      content: [ 
+      { name: "query",
+      content: [
       { type: "text",
       data: [ "What's the speed of light?" ],
       tags: ["localhost", "8083", "1", "1"] },
@@ -240,12 +240,12 @@ in order to add your own service into Lucida. Let's break it down into two steps
 
       . We can define arbitrarily complicated service graphs. For example, for the following service graph:
 
-      ![Alt text](service_graph_0.png?raw=true "Service Graph")
+      ![Alt text](doc/service_graph_0.png?raw=true "Service Graph")
 
       , the resulting `QuerySpec` may look like this, assuming YOSX is running at 909X:
 
       ```
-      { name: "query", 
+      { name: "query",
       content: [
       { type: "image",
       data: [ "1234567...abcdefg" ],
@@ -300,9 +300,9 @@ in order to add your own service into Lucida. Let's break it down into two steps
       and the entry point (which uses a multi-threaded server provided by Thrift) is in `CalendarDaemon.java`.
 
       If it is written in other programming languages, please refer to [the official tutorial](https://thrift.apache.org/tutorial/).
-    
-   4. Here is a list of what you need to do for step 1: 
-    
+
+   4. Here is a list of what you need to do for step 1:
+
       * Add a thrift wrapper which typically consists of a Thrift handler implementing the Thrift interfaces,
         and a daemon program which is the entry point of your service.
         Refer to the code examples mentioned above.
@@ -320,29 +320,29 @@ in order to add your own service into Lucida. Let's break it down into two steps
       * (Docker deployment) Create a Dockerfile image for your service, or merge it into the top-level [`Dockerfile`](Dockerfile)
        and add Kubernetes `yaml` scripts for your service into [`tools/deploy/`](tools/deploy/).
 
-2. Configure the command center. 
+2. Configure the command center.
 
    [`lucida/commandcenter/controllers/Config.py`](lucida/commandcenter/controllers/Config.py)
    is the only file you must modify,
    but you may also need to add sample queries to [`lucida/commandcenter/data/`](lucida/commandcenter/data/)
    as training data for the query classifier.
-  
+
    1. Modify the configuration file [`lucida/commandcenter/controllers/Config.py`](lucida/commandcenter/controllers/Config.py).
-    
+
       ```
-      SERVICES = { 
+      SERVICES = {
         'IMM' : Service('IMM', 8082, 'image', 'image'),  # image matching
         'QA' : Service('QA', 8083, 'text', 'text'), # question answering
         'CA' : Service('CA', 8084, 'text', None), # calendar
         }
 
-      CLASSIFIER_DESCRIPTIONS = { 
+      CLASSIFIER_DESCRIPTIONS = {
         'text' : { 'class_QA' :  Graph([Node('QA')]),
                    'class_CA' : Graph([Node('CA')]) },
         'image' : { 'class_IMM' : Graph([Node('IMM')]) },
         'text_image' : { 'class_QA': Graph([Node('QA')]),
-                         'class_IMM' : Graph([Node('IMM')]), 
-                         'class_IMM_QA' : Graph([Node('IMM', [1]), Node('QA')]) } 
+                         'class_IMM' : Graph([Node('IMM')]),
+                         'class_IMM_QA' : Graph([Node('IMM', [1]), Node('QA')]) }
         }
       ```
 
@@ -422,7 +422,7 @@ in order to add your own service into Lucida. Let's break it down into two steps
       Thus, a `QuerySpec` like the following will be sent to the `IMM` service:
 
       ```
-      { name: "query", 
+      { name: "query",
       content: [
       { type: "image",
       data: [ "1234567...abcdefg" ],
@@ -449,9 +449,9 @@ in order to add your own service into Lucida. Let's break it down into two steps
 
       Be aware that there are other parameters that you can change in this configuration file,
       which are pretty self-explanatory in their names and comments.
-    
+
    2. Add training data for your own query class.
-  
+
       We already prepare some sample training data in [`lucida/commandcenter/data/`](lucida/commandcenter/data/),
       but if you need to define a custom type of query that your service can handle,
       you should create the following file in the above directory:
@@ -461,4 +461,4 @@ in order to add your own service into Lucida. Let's break it down into two steps
       ```
 
       , and have at least 40 pieces of text in it, each being one way to ask about the same question.
-    
+
