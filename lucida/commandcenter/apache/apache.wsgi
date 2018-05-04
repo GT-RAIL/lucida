@@ -1,4 +1,4 @@
-python_home = '/usr/local/lucida/tools/python_2_7_12'
+python_home = '/usr/local/lucida/pyenv'
 activate_this = python_home + '/bin/activate_this.py'
 execfile(activate_this, dict(__file__=activate_this))
 

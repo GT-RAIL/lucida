@@ -3,7 +3,9 @@ from __future__ import division
 from __future__ import unicode_literals
 
 import sys, glob, os
-sys.path.insert(0, glob.glob('/usr/local/src/thrift-0.9.3/lib/py/build/lib*')[0])
+sys.path.insert(
+    0, glob.glob(os.getenv('LUCIDA_DEPS_ROOT'), 'thrift-0.9.3/lib/py/build/lib*')[0]
+)
 
 from controllers import *
 from controllers.Parser import cmd_port
