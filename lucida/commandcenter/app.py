@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import sys, glob, os
 sys.path.insert(
-    0, glob.glob(os.getenv('LUCIDA_DEPS_ROOT'), 'thrift-0.9.3/lib/py/build/lib*')[0]
+    0, glob.glob(os.path.join(os.getenv('THRIFT_ROOT', ''), '/lib/py/build/lib*'))[0]
 )
 
 from controllers import *

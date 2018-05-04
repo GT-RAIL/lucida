@@ -14,10 +14,10 @@ spec:
         name: web
     spec:
       containers:
-      - image: gtrail/lucida:commandcenter
+      - image: gtrail/lucida:cc_test
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDA_ROOT/commandcenter/apache/ && sed -i s/LogLevel\ warn/LogLevel\ debug/ /etc/apache2/sites-available/000-default.conf && export ASR_ADDR_PORT=ws://localhost:30001 && env > envs.txt && chown -R www-data:www-data /usr/local/lucida/lucida/commandcenter && apachectl -DFOREGROUND -e debug']
+        args: ['cd $LUCIDA_ROOT/commandcenter/apache/ && export ASR_ADDR_PORT=ws://localhost:30001 && env > envs.txt && chown -R www-data:www-data $LUCIDA_ROOT/commandcenter && apachectl -DFOREGROUND']
         name: web
         ports:
-        - containerPort: 80
+        - containerPort: 8000
           name: http-server

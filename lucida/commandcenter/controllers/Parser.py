@@ -1,5 +1,7 @@
-import ConfigParser, sys
-
+import os
+import sys
+import os.path as pth
+import ConfigParser
 
 class FakeSecHead(object):
     def __init__(self, fp):
@@ -16,6 +18,8 @@ class FakeSecHead(object):
             return self.fp.readline()
 
 cp = ConfigParser.SafeConfigParser()
-cp.readfp(FakeSecHead(open("/usr/local/lucida/lucida/config.properties")))
+cp.readfp(
+    FakeSecHead(open(pth.join(os.getenv('LUCIDA_ROOT', ''), "config.properties")))
+)
 port_dic = dict(cp.items('asection'))
 cmd_port = int(port_dic['cmd_port'])
