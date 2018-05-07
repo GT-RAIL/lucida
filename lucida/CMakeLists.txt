@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0)
 project(lucida)
 
 # Force check the separation of source and build dir
@@ -13,7 +13,7 @@ set(
   CACHE INTERNAL ""
 )
 
-# First generate the thrift targets
+# First generate the thrift targets. This is included in all
 add_custom_target(
   thrift ALL
   DEPENDS thrift-python thrift-java thrift-cpp
@@ -44,3 +44,9 @@ set_property(
   APPEND
   PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "${LUCIDA_PYTHON_SITE_PACKAGES}/lucidaservice" "${LUCIDA_PYTHON_SITE_PACKAGES}/lucidatypes" "gen-java" "gen-cpp2"
 )
+
+# Include each of the subdirectories
+add_subdirectory(commandcenter EXCLUDE_FROM_ALL)
+
+# Each of the subdirectories depends on thrift
+add_dependencies(commandcenter thrift)

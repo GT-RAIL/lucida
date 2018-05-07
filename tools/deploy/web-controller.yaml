@@ -14,9 +14,9 @@ spec:
         name: web
     spec:
       containers:
-      - image: gtrail/lucida:cc_test
+      - image: gtrail/lucida:commandcenter
         command: ['/bin/sh', '-c']
-        args: ['cd $LUCIDA_ROOT/commandcenter/apache/ && export ASR_ADDR_PORT=ws://localhost:30001 && env > envs.txt && chown -R www-data:www-data $LUCIDA_ROOT/commandcenter && apachectl -DFOREGROUND']
+        args: ['export ASR_ADDR_PORT=ws://localhost:30001 && env > /tmp/envs.txt && chown -R www-data:www-data $LUCIDA_ROOT/commandcenter && apachectl -DFOREGROUND']
         name: web
         ports:
         - containerPort: 8000
