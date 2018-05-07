@@ -25,7 +25,7 @@ class MusicHandler:
 		'''
 		Do nothing
 		'''
-		return 
+		return
 
 	def learn(self, LUCID, knowledge):
 		'''

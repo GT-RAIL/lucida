@@ -50,6 +50,8 @@ set_property(
 
 # Include each of the subdirectories
 add_subdirectory(commandcenter)
+add_subdirectory(musicservice)
 
 # Each of the subdirectories depends on thrift
 add_dependencies(commandcenter thrift)
+add_dependencies(musicservice thrift)
