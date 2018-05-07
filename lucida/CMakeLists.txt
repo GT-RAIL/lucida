@@ -13,6 +13,9 @@ set(
   CACHE INTERNAL ""
 )
 
+# Set exposed variables
+set(APACHE_DIRECTORY "/etc/apache2" CACHE PATH "")
+
 # First generate the thrift targets. This is included in all
 add_custom_target(
   thrift ALL
@@ -46,7 +49,7 @@ set_property(
 )
 
 # Include each of the subdirectories
-add_subdirectory(commandcenter EXCLUDE_FROM_ALL)
+add_subdirectory(commandcenter)
 
 # Each of the subdirectories depends on thrift
 add_dependencies(commandcenter thrift)
