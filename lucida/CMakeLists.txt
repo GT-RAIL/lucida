@@ -51,7 +51,9 @@ set_property(
 # Include each of the subdirectories
 add_subdirectory(commandcenter)
 add_subdirectory(musicservice)
+add_subdirectory(weather)
 
 # Each of the subdirectories depends on thrift
-add_dependencies(commandcenter thrift)
-add_dependencies(musicservice thrift)
+add_dependencies(commandcenter thrift-python)
+add_dependencies(musicservice thrift-python)
+add_dependencies(weather thrift-python)

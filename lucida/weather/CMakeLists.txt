@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(lucida_musicservice)
+project(lucida_weather)
 
 # Force check the separation of source and build dir
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
@@ -7,4 +7,4 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 endif()
 
 # Nothing to be done for building the command center
-add_custom_target(musicservice)
+add_custom_target(weather)
