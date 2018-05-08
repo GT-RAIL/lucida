@@ -9,10 +9,10 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include <string> 
+#include <string>
 
 #include <folly/futures/Future.h>
-#include "gen-cpp2/LucidaService.h"
+#include <gen-cpp2/LucidaService.h>
 #include <thrift/lib/cpp2/async/HeaderClientChannel.h>
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
@@ -75,7 +75,10 @@ int main(int argc, char* argv[]) {
 	EventBase event_base;
 
 	Properties props;
-	props.Read("../../../config.properties");
+	char propsFilename[100];
+	strcpy(propsFilename, std::getenv("LUCIDA_ROOT"));
+	strcat(propsFilename, "/config.properties");
+	props.Read(propsFilename);
 	string portVal;
 	int port;
 	if (!props.GetValue("IMM_PORT", portVal)) {
@@ -90,9 +93,9 @@ int main(int argc, char* argv[]) {
 	LucidaServiceAsyncClient client(
 			std::unique_ptr<HeaderClientChannel, DelayedDestruction::Destructor>(
 					new HeaderClientChannel(socket_t)));
-	
+
 	// Open the images.
-	string db = fs::current_path().string() + "/test_db";
+	string db = string(std::getenv("LUCIDA_ROOT")) + "/imagematching/opencv_imm/test/test_db";
 	fs::path p = fs::system_complete(db);
 	assert(fs::is_directory(p));
 	fs::directory_iterator end_iter;
@@ -118,7 +121,7 @@ int main(int argc, char* argv[]) {
 		cout << "Going to loop" << endl;
 		event_base.loop();
 	}
-  
+
 	// Infer.
 	// Make request.
 	int num_tests = 3;

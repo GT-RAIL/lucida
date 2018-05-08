@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../gen-cpp2/LucidaService.h"
+#include <gen-cpp2/LucidaService.h>
 
 #include "caffe/caffe.hpp"
 
@@ -42,7 +42,7 @@ class FACEHandler : virtual public LucidaServiceSvIf {
   std::string network_;
   std::string weights_;
   caffe::Net<float>* net_;
-  
+
   std::vector<std::string>* classes_;
 };
 

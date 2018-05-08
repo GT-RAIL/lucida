@@ -1,7 +1,7 @@
 #pragma once
 
 #include <mutex>
-#include "gen-cpp2/LucidaService.h"
+#include <gen-cpp2/LucidaService.h>
 
 namespace cpp2 {
 class FakeImmHandler : virtual public LucidaServiceSvIf {

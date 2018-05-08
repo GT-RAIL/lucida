@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <folly/futures/Future.h>
-#include "gen-cpp2/LucidaService.h"
+#include <gen-cpp2/LucidaService.h>
 #include <thrift/lib/cpp2/async/HeaderClientChannel.h>
 
 using namespace folly;

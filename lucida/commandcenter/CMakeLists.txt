@@ -14,7 +14,7 @@ set(
 )
 
 # Nothing to be done for building the command center
-add_custom_target(commandcenter)
+add_custom_target(commandcenter ALL)
 
 # When installing the commandcenter, install the apache configs
 install(

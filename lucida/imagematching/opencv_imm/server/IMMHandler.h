@@ -3,7 +3,7 @@
 #include <vector>
 #include <mutex>
 
-#include "gen-cpp2/LucidaService.h"
+#include <gen-cpp2/LucidaService.h>
 #include "Image.h"
 #include "mongo/client/dbclient.h"
 
