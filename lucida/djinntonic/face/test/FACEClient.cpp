@@ -46,7 +46,10 @@ int main(int argc, char* argv[]){
 	EventBase event_base;
 
 	Properties props;
-	props.Read("../../../config.properties");
+	char propsFilename[100];
+	strcpy(propsFilename, std::getenv("LUCIDA_ROOT"));
+	strcat(propsFilename, "/config.properties");
+	props.Read(propsFilename);
 	string portVal;
 	int port;
 	if (!props.GetValue("FACE_PORT", portVal)) {

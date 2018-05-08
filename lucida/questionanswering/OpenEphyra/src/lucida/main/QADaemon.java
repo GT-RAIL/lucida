@@ -1,6 +1,6 @@
 package lucida.main;
 
-// Thrift java libraries 
+// Thrift java libraries
 import org.apache.thrift.server.TNonblockingServer;
 import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TNonblockingServerSocket;
@@ -33,15 +33,15 @@ import lucida.handler.QAServiceHandler.AsyncQAServiceHandler;
  * Starts the question-answer server and listens for requests.
  */
 public class QADaemon {
-	/** 
+	/**
 	 * Entry point for question-answer.
 	 * @param args the argument list. Provide port numbers
 	 * for both sirius and qa.
 	 */
-	public static void main(String [] args) 
-			throws TTransportException, IOException, InterruptedException {	
+	public static void main(String [] args)
+			throws TTransportException, IOException, InterruptedException {
 		Properties port_cfg = new Properties();
-		InputStream input = new FileInputStream("../../config.properties");
+		InputStream input = new FileInputStream(System.getenv("LUCIDA_ROOT") + "/config.properties");
 		port_cfg.load(input);
 		String port_str = port_cfg.getProperty("QA_PORT");
 		Integer port = Integer.valueOf(port_str);
@@ -49,7 +49,7 @@ public class QADaemon {
 				new QAServiceHandler.AsyncQAServiceHandler());
 		TNonblockingServerTransport transport = new TNonblockingServerSocket(port);
 		TThreadedSelectorServer.Args arguments = new TThreadedSelectorServer.Args(transport)
-		.processor(proc)	
+		.processor(proc)
 		.protocolFactory(new TBinaryProtocol.Factory())
 		.transportFactory(new TFramedTransport.Factory());
 		final TThreadedSelectorServer server = new TThreadedSelectorServer(arguments);

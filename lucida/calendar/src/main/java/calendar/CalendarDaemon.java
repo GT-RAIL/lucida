@@ -35,7 +35,7 @@ public class CalendarDaemon {
 	public static void main(String [] args)
 			throws TTransportException, IOException, InterruptedException {
 		Properties port_cfg = new Properties();
-		InputStream input = new FileInputStream("../config.properties");
+		InputStream input = new FileInputStream(System.getenv("LUCIDA_ROOT") + "/config.properties");
 		port_cfg.load(input);
 		String port_str = port_cfg.getProperty("CA_PORT");
 		Integer port = Integer.valueOf(port_str);

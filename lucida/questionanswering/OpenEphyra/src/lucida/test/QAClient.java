@@ -8,7 +8,7 @@ import java.util.Properties;
 import java.util.List;
 import java.util.ArrayList;
 
-//Thrift java libraries 
+//Thrift java libraries
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -19,7 +19,7 @@ import org.apache.thrift.transport.TTransport;
 //Generated code
 import lucida.thrift.*;
 
-/** 
+/**
  * A testing Client that sends a single query to OpenEphyra Server and prints the results.
  */
 public class QAClient {
@@ -53,11 +53,11 @@ public class QAClient {
 		return rtn;
 	}
 
-	public static void main(String [] args) 
+	public static void main(String [] args)
 		throws IOException {
 		// Collect the port number.
 		Properties port_cfg = new Properties();
-		InputStream input = new FileInputStream("../../config.properties");
+		InputStream input = new FileInputStream(System.getenv("LUCIDA_ROOT") + "/config.properties");
 		port_cfg.load(input);
 		String port_str = port_cfg.getProperty("QA_PORT");
 		final Integer port = Integer.valueOf(port_str);
@@ -74,7 +74,7 @@ public class QAClient {
 		final QueryInput knowledge_url = createQueryInput(
 				"url",
 				"https://en.wikipedia.org/wiki/Apple_Inc.",
-				"abcdefg");	
+				"abcdefg");
 		final QuerySpec knowledge = createQuerySpec(
 				"knowledge",
 				new ArrayList<QueryInput>() {{
@@ -109,7 +109,7 @@ public class QAClient {
 				new ArrayList<QueryInput>() {{
 					add(query_input);
 				}});
-		
+
 		// Initialize thrift objects.
 		// TTransport transport = new TSocket("clarity08.eecs.umich.edu", port);
 		TTransport transport = new TSocket("localhost", port);
@@ -135,7 +135,7 @@ public class QAClient {
 			answer = client.infer(LUCID, query);
 			// Print the answer.
 			System.out.println("///// Answer: /////");
-			System.out.println(answer);	
+			System.out.println(answer);
 			transport.close();
 		} catch (TException x) {
 			x.printStackTrace();

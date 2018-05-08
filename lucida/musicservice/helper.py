@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import ConfigParser, sys, re
+import ConfigParser, sys, re, os
 
 # Mood invert index
 mood_dic = {
@@ -16,7 +16,7 @@ mood_dic = {
 "easygoing" : "42946",
 "happy" : "42946",
 "relaxed" : "42946",
-"leisurable" : "42946" , 
+"leisurable" : "42946" ,
 "yearning" : "65325",
 "eager":"65325",
 "hungry": "65325",
@@ -92,13 +92,13 @@ class FakeSecHead(object):
 
     def readline(self):
         if self.sechead:
-            try: 
+            try:
                 return self.sechead
-            finally: 
+            finally:
                 self.sechead = None
-        else: 
+        else:
             return self.fp.readline()
 
 cp = ConfigParser.SafeConfigParser()
-cp.readfp(FakeSecHead(open("../../config.properties")))
+cp.readfp(FakeSecHead(open(os.getenv("LUCIDA_ROOT") + "/config.properties")))
 port_dic = dict(cp.items('asection'))
